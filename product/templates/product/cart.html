@@ -1,0 +1,70 @@
+{% extends 'base.html' %}
+{% block title %}Cart{% endblock %}
+
+{% block content %}
+
+    <div id="cart">
+        <ul class="cart-list">
+        </ul>
+
+        <form
+                action="#"
+                method="POST"
+                class="checkout-form"
+                data-api-url="{% url 'order-create'%}"
+                > {% csrf_token %}
+            <fieldset class = 'checkout-form__wrapper'>
+                <label class="checkout-form__label">
+                    Full name:
+                    <input
+                            type="text"
+                            name="fullName"
+                            placeholder="Enter your full name"
+                            class="checkout-form__input"
+                            required>
+                </label>
+                <label class="checkout-form__label">
+                    Your address:
+                    <input
+                            type="text"
+                            name="address"
+                            placeholder="Enter your address"
+                            class="checkout-form__input"
+                            required>
+                </label>
+                <label class="checkout-form__label">
+                    Your phone number:
+                    <input
+                            type="tel"
+                            name="phoneNumber"
+                            placeholder="Enter your phone number"
+                            class="checkout-form__input"
+                            required>
+                </label>
+                <label class="checkout-form__label">
+                    Your email:
+                    <input
+                            type="email"
+                            name="email"
+                            placeholder="Enter your email"
+                            class="checkout-form__input"
+                            required>
+                </label>
+                <button class="btn btn-success checkout-form__submit-button">
+                    Make order
+                </button>
+            </fieldset>
+        </form>
+    </div>
+
+
+
+    {#    it was before I use js for form process#}
+    {#    {% for item in cart_data %}#}
+    {#        {{ item.product }} <br>#}
+    {#        {{ item.qty }} <br>#}
+    {#        <form action="{% url 'product:cart' %}" method="DELETE" class="product-details__form">#}
+    {#            <input type="hidden" name="next" value="{{ request.path }}">#}
+    {#            <input type="hidden" name="product_id" value="{{ product.id }}">#}
+    {#    {% endfor %}#}
+{% endblock %}

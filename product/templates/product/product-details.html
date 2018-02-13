@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{% block title %}{{ product.title }}{% endblock %}
+
+
+{% block content %}
+    <div class="container">
+        <h3 class="text-center">
+            {{ product.title }}
+        </h3>
+        <div class = "product-details__body">
+            <div class="product-details__thumbnails">
+{#                here can be product image#}
+{#                <img src="#" alt="Product image" class="img-thumbnail rounded ">#}
+            </div>
+            <h4 class="product-details_price">Price for one item: {{ product.price }} $</h4>
+            <form action="{% url 'product:cart' %}" method="POST" class="product-details__form">
+                <input type="hidden" name="next" value="{{ request.path }}">
+                <input type="hidden" name="product_id" value="{{ product.id }}">
+                <div class="form-group">
+                    <label>
+                        <input id="product-detail__counter"
+                               type="number"
+                               min="0"
+                               max="100"
+                               step="1"
+                               value="0"
+                               name="product_qty"/>
+                        items
+                    </label>
+                    <button id ="product-details__add-to-cart-btn"
+                            type="submit"
+                            class="btn btn-primary"
+                            data-product-id = '{{ product.id }}'
+                            data-product-title =  '{{ product.title}}'
+                            data-product-price =  '{{ product.price}}'>
+                        Add to cart!
+                    </button>
+                </div>
+            </form>
+            <h3>
+                Total amount:
+                <span id="product-details__total-amount"
+                      class = 'product-details__total-amount' data-price = '{{ product.price }}' >
+                    0
+                </span>
+                $
+            </h3>
+        </div>
+    </div>
+{% endblock %}
